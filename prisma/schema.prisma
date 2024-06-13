@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[] @relation("CategoryToProduct")
+  imageUrl  String
+}
+
+model Product {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  categoryId  String   @db.ObjectId
+  category    Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  images      Image[]  @relation("ProductToImage")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([categoryId])
+}
+
+model Image {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  productId String?  @db.ObjectId
+  product   Product? @relation("ProductToImage", fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([productId])
+}
