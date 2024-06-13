@@ -14,8 +14,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { server_signIn } from "@/app/actions/index";
-import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export const formSchema = z.object({
   email: z.string().min(8).max(30),
@@ -23,7 +23,6 @@ export const formSchema = z.object({
 });
 
 function AdminLoginPage() {
-  const { toast } = useToast();
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -39,10 +38,7 @@ function AdminLoginPage() {
       await server_signIn(values);
       router.replace("/");
     } catch (e: any) {
-      toast({
-        title: "Invalid credentials !",
-        variant: "destructive",
-      });
+      toast.error("Invalid credentials.");
     }
   };
   return (
