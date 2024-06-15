@@ -1,14 +1,16 @@
-import { auth as middlware } from "@/auth";
+import { auth as middleware } from "@/auth"; 
 import { NextResponse } from "next/server";
 
-export default middlware((req) => {
+export default middleware((req) => {
   const { pathname } = req.nextUrl;
 
   if (req.auth && pathname === "/admin-login") {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  if (!req.auth && pathname !== "/admin-login") {
+  console.log(pathname);
+
+  if (!req.auth && pathname !== "/admin-login" && !pathname.startsWith("/api/resources")) {
     return NextResponse.redirect(new URL("/admin-login", req.url));
   }
 

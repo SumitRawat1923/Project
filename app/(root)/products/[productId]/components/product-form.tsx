@@ -71,9 +71,9 @@ function ProductForm({ initialData, categories }: ProductFormProps) {
   const onSubmit = async (data: TypeFormSchema) => {
     try {
       if (initialData) {
-        await axios.patch(`/api/products/${params.productId}`, data);
+        await axios.patch(`/api/resources/products/${params.productId}`, data);
       } else {
-        await axios.post(`/api/products`, data);
+        await axios.post(`/api/resources/products`, data);
       }
       router.push(`/products`);
       router.refresh();
@@ -85,7 +85,7 @@ function ProductForm({ initialData, categories }: ProductFormProps) {
 
   const onDelete = async () => {
     try {
-      await axios.delete(`/api/products/${params.productId}`);
+      await axios.delete(`/api/resources/products/${params.productId}`);
       router.push(`/products`);
       router.refresh();
       toast.success("Product deleted.");

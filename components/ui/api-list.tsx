@@ -10,7 +10,7 @@ interface ApiListProps {
 
 function ApiList({ entityIdName, entityName }: ApiListProps) {
   const origin = useOrigin();
-  const baseUrl = `${origin}/api`;
+  const baseUrl = `${origin}/api/resources`;
   return (
     <>
       <ApiAlert

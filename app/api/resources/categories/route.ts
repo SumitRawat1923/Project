@@ -30,12 +30,6 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
-    const session = await auth();
-
-    if (!session) {
-      return NextResponse.json("Not authenticated", { status: 401 });
-    }
-
     const categories = await prismadb.category.findMany({});
     return NextResponse.json(categories, { status: 200 });
   } catch (error) {

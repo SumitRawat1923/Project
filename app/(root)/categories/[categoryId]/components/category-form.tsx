@@ -50,9 +50,9 @@ function CategoryForm({ initialData }: CategoryFormProps) {
   const onSubmit = async (data: TypeFormSchema) => {
     try {
       if (initialData) {
-        await axios.patch(`/api/categories/${params.categoryId}`, data);
+        await axios.patch(`/api/resources/categories/${params.categoryId}`, data);
       } else {
-        await axios.post(`/api/categories`, data);
+        await axios.post(`/api/resources/categories`, data);
       }
       router.push(`/categories`);
       router.refresh();
@@ -64,7 +64,7 @@ function CategoryForm({ initialData }: CategoryFormProps) {
 
   const onDelete = async () => {
     try {
-      await axios.delete(`/api/categories/${params.categoryId}`);
+      await axios.delete(`/api/resources/categories/${params.categoryId}`);
       router.push(`/categories`);
       router.refresh();
       toast.success("Category deleted.");

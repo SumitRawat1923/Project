@@ -1,6 +1,8 @@
 import { auth } from "@/auth";
 import prismadb from "@/lib/prismadb";
+import { isValidObjectId } from "@/lib/utils";
 import { NextResponse } from "next/server";
+
 export async function POST(req: Request) {
   try {
     const session = await auth();
@@ -39,10 +41,21 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET(req: Request) {
+export async function GET(req: Request) {  
   try {
     const { searchParams } = new URL(req.url);
+    const categoryId = searchParams.get("categoryId") || undefined;
+
+    if (categoryId && !isValidObjectId(categoryId))
+      return NextResponse.json(
+        { message: "Invalid categoryId." },
+        { status: 400 }
+      );
+
     const products = await prismadb.product.findMany({
+      where: {
+        categoryId,
+      },
       include: {
         images: true,
         category: true,
@@ -51,7 +64,14 @@ export async function GET(req: Request) {
         createdAt: "desc",
       },
     });
-    return NextResponse.json(products, { status: 200 });
+    return NextResponse.json(products, {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
   } catch (error) {
     console.log("[PRODUCTS_GET]", error);
     return NextResponse.json("Internal error", { status: 500 });
