@@ -33,7 +33,7 @@ function CategoryClient({ data }: CategoryClientProps) {
       </div>
       <Separator />
       <DataTable searchKey="name" columns={columns} data={data} />
-      <Heading title="API" description="API calls for Billboard." />
+      <Heading title="API" description="API calls for Category." />
       <Separator />
       <ApiList entityName="categories" entityIdName="categoryId" />
     </>
