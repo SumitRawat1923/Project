@@ -17,7 +17,7 @@ import { server_signIn } from "@/app/actions/index";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-export const formSchema = z.object({
+const formSchema = z.object({
   email: z.string().min(8).max(30),
   password: z.string().min(8).max(20),
 });

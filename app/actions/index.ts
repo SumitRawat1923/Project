@@ -1,10 +1,7 @@
 "use server";
-
-import { z } from "zod";
-import { formSchema } from "../admin-login/page";
 import { signIn, signOut } from "@/auth";
 
-export const server_signIn = async (values: z.infer<typeof formSchema>) => {
+export const server_signIn = async (values: any) => {
   const response = await signIn("credentials", {
     redirect: false,
     email: values.email,
