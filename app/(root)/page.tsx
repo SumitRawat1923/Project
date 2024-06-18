@@ -1,4 +1,8 @@
 "use client";
 export default function Home() {
-  return <div>This is Dashboard Page.</div>;
+  return (
+    <div className="flex items-center justify-center h-full">
+      <div className="text-2xl md:text-4xl">Development in progress...</div>
+    </div>
+  );
 }
