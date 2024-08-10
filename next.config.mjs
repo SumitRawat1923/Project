@@ -5,6 +5,10 @@ const nextConfig = {
       {
         source: "/api/:path*",
         headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store',
+          },
           { key: "Access-Control-Allow-Credentials", value: "false" },
           { key: "Access-Control-Allow-Origin", value: "*" },
           {
