@@ -4,6 +4,8 @@ import { ProductColumn } from "./components/columns";
 import ProductClient from "./components/Client";
 import prismadb from "@/lib/prismadb";
 
+export const revalidate = 0;
+
 async function ProductsPage() {
   const products = await prismadb.product.findMany({
     include: { category: true },

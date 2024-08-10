@@ -4,6 +4,8 @@ import { CategoryColumn } from "./components/columns";
 import CategoryClient from "./components/Client";
 import prismadb from "@/lib/prismadb";
 
+export const revalidate = 0;
+
 async function CategoriesPage() {
   const categories = await prismadb.category.findMany({
     orderBy: {

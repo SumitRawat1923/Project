@@ -7,7 +7,7 @@ import ToastProvider from "@/providers/toast-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Vashnoi Handloom CMS",
+  title: "Vishnoi Handloom CMS",
   description: "This is a cms.",
 };
 
