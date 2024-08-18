@@ -38,7 +38,7 @@ function CellAction({ data }: CellActionProps) {
       toast.success("Category deleted.");
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong.");
+      toast.error("Delete the products in this category first.");
     } finally {
       setOpen(false);
       setLoading(false);
