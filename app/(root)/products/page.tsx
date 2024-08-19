@@ -17,6 +17,7 @@ async function ProductsPage() {
   const formattedProducts: ProductColumn[] = products.map((item) => ({
     id: item.id,
     name: item.name,
+    price:item.price,
     category: item.category.name,
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));

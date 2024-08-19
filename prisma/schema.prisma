@@ -25,6 +25,7 @@ model Product {
   images      Image[]  @relation("ProductToImage")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  price       String   @default("0.00")
 
   @@index([categoryId])
 }

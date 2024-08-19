@@ -38,6 +38,7 @@ interface ProductFormProps {
 
 const formSchema = z.object({
   name: z.string().min(1),
+  price: z.string().min(1),
   images: z
     .object({
       url: z.string(),
@@ -66,6 +67,7 @@ function ProductForm({ initialData, categories }: ProductFormProps) {
           name: "",
           images: [],
           categoryId: "",
+          price: "0.0",
         },
   });
   const onSubmit = async (data: TypeFormSchema) => {
@@ -158,6 +160,24 @@ function ProductForm({ initialData, categories }: ProductFormProps) {
                   <FormControl>
                     <Input
                       placeholder="Product name"
+                      disabled={form.formState.isSubmitting}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Product price"
                       disabled={form.formState.isSubmitting}
                       {...field}
                     />

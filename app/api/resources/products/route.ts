@@ -11,9 +11,10 @@ export async function POST(req: Request) {
       return NextResponse.json("Not authenticated", { status: 401 });
     }
 
-    const { name, categoryId, images, description } = await req.json();
+    const { name, categoryId, images, description, price } = await req.json();
 
     if (!name) return NextResponse.json("Name is required", { status: 400 });
+    if (!price) return NextResponse.json("Price is required", { status: 400 });
     if (!description)
       return NextResponse.json("Description is required", { status: 400 });
 
@@ -28,6 +29,7 @@ export async function POST(req: Request) {
         name,
         description,
         categoryId,
+        price,
         images: {
           create: images.map((image: { url: string }) => ({ url: image.url })),
         },
@@ -41,7 +43,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET(req: Request) {  
+export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const categoryId = searchParams.get("categoryId") || undefined;

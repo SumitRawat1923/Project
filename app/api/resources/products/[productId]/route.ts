@@ -40,9 +40,10 @@ export async function PATCH(
     if (!productId) {
       return new NextResponse("ProductId is required", { status: 401 });
     }
-    const { name, categoryId, images, description } = await req.json();
+    const { name, categoryId, images, description,price } = await req.json();
 
     if (!name) return NextResponse.json("Name is required", { status: 400 });
+    if (!price) return NextResponse.json("Price is required", { status: 400 });
 
     if (!description)
       return NextResponse.json("Description is required", { status: 400 });
@@ -57,6 +58,7 @@ export async function PATCH(
       },
       data: {
         name,
+        price,
         categoryId,
         images: {
           deleteMany: {},

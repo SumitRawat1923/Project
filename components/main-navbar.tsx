@@ -13,7 +13,7 @@ function MainNavbar({
   const routes = [
     {
       href: `/`,
-      label: "Dashboard",
+      label: "HomePage",
       active: pathname === `/`,
     },
     {
