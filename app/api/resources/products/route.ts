@@ -14,7 +14,6 @@ export async function POST(req: Request) {
     const { name, categoryId, images, description, price } = await req.json();
 
     if (!name) return NextResponse.json("Name is required", { status: 400 });
-    if (!price) return NextResponse.json("Price is required", { status: 400 });
     if (!description)
       return NextResponse.json("Description is required", { status: 400 });
 
